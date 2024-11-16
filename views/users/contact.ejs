@@ -1,0 +1,179 @@
+<%- include('../partials/header.ejs') %>
+<style>
+  #map-section {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  #map {
+    width: 100%;
+    height: 100%;
+  }
+
+  #map iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+</style>
+
+
+<section class="home-section home-full-height" id="map-section">
+  <div id="map">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3554.295848769376!2d76.60698674277256!3d8.998340437960268!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b06073b504aa643%3A0x10732bc4bd51167e!2sThe%20Royal%20Island!5e0!3m2!1sen!2sin!4v1726128580081!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+</section>
+
+<div class="main">
+  <section class="module" id="contact">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+          <h2 class="module-title font-alt">Contact us</h2>
+          <div class="module-subtitle font-serif"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-8">
+          <form id="contactForm" method="post" novalidate>
+            <div class="form-group">
+              <label class="sr-only" for="name">Name</label>
+              <input class="form-control" type="text" id="name" name="name" placeholder="Your Name*" required minlength="2" maxlength="50" />
+              <p class="help-block text-danger" id="nameError"></p>
+            </div>
+            <div class="form-group">
+              <label class="sr-only" for="email">Email</label>
+              <input class="form-control" type="email" id="email" name="email" placeholder="Your Email*" required />
+              <p class="help-block text-danger" id="emailError"></p>
+            </div>
+            <div class="form-group">
+              <textarea class="form-control" rows="7" id="message" name="message" placeholder="Your Message*" required minlength="10"></textarea>
+              <p class="help-block text-danger" id="messageError"></p>
+            </div>
+            <div class="text-center">
+              <button class="btn btn-block btn-round btn-d" id="submitBtn" type="button" onclick="submitForm()">Submit</button>
+            </div>
+            <div id="contactFormResponse" class="text-center"></div>
+          </form>
+          
+          <div class="ajax-response font-alt" id="contactFormResponse"></div>
+        </div>
+        <div class="col-sm-4">
+          <div class="alt-features-item mt-0">
+            <div class="alt-features-icon"><span class="icon-megaphone"></span></div>
+            <h3 class="alt-features-title font-alt">Where to meet</h3>The Royal Island<br />Munroe Island, Kollam<br /> 691502, Kerala
+          </div>
+          <div class="alt-features-item mt-xs-60">
+            <div class="alt-features-icon"><span class="icon-map"></span></div>
+            <h3 class="alt-features-title font-alt">Say Hello</h3>Email: theroyalisland123@gmail.com<br />Phone: +91 999 568 51 36
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="modal fade" id="validationModal" tabindex="-1" aria-labelledby="validationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="validationModalLabel">Validation Error</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p id="modalMessage"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+   function validateForm() {
+  let isValid = true;
+
+  // Get form values
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const message = document.getElementById('message').value.trim();
+
+  // Get error elements
+  const nameError = document.getElementById('nameError');
+  const emailError = document.getElementById('emailError');
+  const messageError = document.getElementById('messageError');
+
+  // Clear previous errors
+  nameError.textContent = '';
+  emailError.textContent = '';
+  messageError.textContent = '';
+
+  // Validate Name
+  if (name.length < 2 || name.length > 50) {
+    nameError.textContent = 'Name must be between 2 and 50 characters.';
+    isValid = false;
+  }
+
+  // Validate Email
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    emailError.textContent = 'Please enter a valid email address.';
+    isValid = false;
+  }
+
+  // Validate Message
+  if (message.length < 10) {
+    messageError.textContent = 'Message must be at least 10 characters long.';
+    isValid = false;
+  }
+
+  return isValid;
+}
+
+function submitForm() {
+  // Validate the form
+  if (!validateForm()) {
+    return;
+  }
+
+  // Get the input values
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const message = document.getElementById('message').value.trim();
+
+  // Submit the form data if everything is valid
+  const formData = {
+    name,
+    email,
+    message
+  };
+
+  fetch('/contact', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(formData)
+  })
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('contactFormResponse').innerHTML = 
+        '<p style="color: green;">Submitted successfully!</p>';
+      document.getElementById('contactForm').reset(); // Reset form
+    })
+    .catch(error => {
+      console.error('Error submitting form:', error);
+      document.getElementById('contactFormResponse').innerHTML = 
+        '<p style="color: red;">Failed to submit. Please try again later.</p>';
+    });
+}
+
+
+
+  </script>
+  <%- include('../partials/footer.ejs') %>
+
+  <!-- JavaScript for form validation -->
+  
+</div>

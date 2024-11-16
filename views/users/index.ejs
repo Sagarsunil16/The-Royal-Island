@@ -1,0 +1,556 @@
+
+  <%- include('../partials/header.ejs') %>
+      <style>
+        /* General styling for the content box */
+.content-box {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  text-align: center;
+  margin-bottom: 20px;
+  padding: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.content-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Styling for images */
+.content-box-image img {
+  width: 100%; /* Ensures the image scales properly */
+  height: 200px; /* Fixed height to maintain consistency */
+  object-fit: cover; /* Ensures the image doesn't stretch */
+  border-bottom: 1px solid #ddd;
+}
+
+/* Styling for titles */
+.content-box-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 15px 0 10px;
+  color: #333;
+}
+
+/* Styling for the text */
+.content-box p {
+  color: #666;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
+  
+}
+
+/* Styling for images within the popular rooms section */
+#menu .menu img {
+  border: 3px solid #f5f5f5;  /* Light border around images */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  /* Shadow for depth */
+  border-radius: 8px;  /* Slightly rounded corners */
+  padding: 5px;  /* Padding to separate image from border */
+  transition: transform 0.3s ease;  /* Smooth transition effect on hover */
+  margin-bottom: 10px;
+  
+}
+
+#menu .menu img:hover {
+  transform: scale(1.05);  /* Scale up slightly on hover for emphasis */
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 1;
+  overflow: hidden; /* Removes vertical scrollbar */
+  padding-top: 60px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.8); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal-content {
+  position: static;
+  margin: auto;
+  display: block;
+  max-width: 80%;
+  max-height: 90%; /* Ensures the image doesn't exceed the modal's height */
+  height: auto;
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+/* Close Button */
+.closeX {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+}
+#experiences {
+  background-color: white; /* Soft background for better contrast */
+  padding: 60px 0; /* Add space above and below the section */
+}
+
+#experiences .experience {
+  background: rgb(255, 255, 255); /* White background for each package */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for a floating effect */
+  border-radius: 10px; /* Rounded corners for cards */
+  padding: 20px; /* Internal spacing */
+  margin-bottom: 30px; /* Space between cards */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+}
+
+#experiences .experience:hover {
+  transform: translateY(-10px); /* Slight lift on hover */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+#experiences .experience h4 {
+  font-size: 24px; /* Larger heading */
+  color: black; /* Dark color for titles */
+  margin-bottom: 15px; /* Space below heading */
+  text-align: center; /* Center align headings */
+}
+
+#experiences .experience ul {
+  list-style: none; /* Remove bullet points */
+  padding: 0; /* No left padding */
+  margin: 0; /* No top/bottom margin */
+}
+
+#experiences .experience ul li {
+  margin: 10px 0; /* Space between items */
+  color: black; /* Softer color for list text */
+  font-size: 16px; /* Standard readable size */
+}
+
+#experiences .experience h5 {
+  font-size: 20px; /* Larger price text */
+  color: #ff0000; /* Highlight color for price */
+  text-align: center; /* Center align price */
+  margin-top: 15px; /* Space above price */
+}
+#experiences .experience p{
+  text-align: center;
+}
+#experiences .row {
+  justify-content: center; /* Center align columns */
+}
+
+.call-button {
+  display: inline-block;
+  background-color: #16a085; /* Green color for call button */
+  color: #ffffff; /* White text color */
+  font-size: 16px; /* Readable text size */
+  font-weight: bold; /* Bold text for emphasis */
+  padding: 10px 20px; /* Space inside the button */
+  text-align: center; /* Center text alignment */
+  text-decoration: none; /* Remove underline */
+  border-radius: 5px; /* Rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+}
+
+.call-button:hover {
+  background-color: #138a72; /* Darker green on hover */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+  transform: translateY(-2px); /* Slight lift on hover */
+}
+
+.call-button:active {
+  background-color: #11775d; /* Even darker green when clicked */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Reduced shadow when active */
+  transform: translateY(0); /* Reset position when active */
+}
+
+
+
+
+
+      </style>
+      <section class="home-section home-full-height" id="home">
+        <div class="hero-slider">
+          <ul class="slides">
+            <li class="bg-dark-30 restaurant-page-header bg-dark" style="background-image:url(&quot;assets/images/restaurant/slider1.jpg&quot;);">
+              <div class="titan-caption">
+                <div class="caption-content">
+                  <div class="font-alt mb-30 titan-title-size-1"> Hello & welcome</div>
+                  <div class="font-alt mb-40 titan-title-size-4">We are The Royal Island</div><a class="section-scroll btn btn-border-w btn-round" href="#menu">Check Our Rooms</a>
+                </div>
+              </div>
+            </li>
+            <li class="bg-dark-30 restaurant-page-header bg-dark" style="background-image:url(&quot;assets/images/restaurant/slider2.jpg&quot;);">
+              <div class="titan-caption">
+                <div class="caption-content">
+                  <div class="font-alt mb-30 titan-title-size-2">Experience luxury at The Royal Island on Munroe Island. Enjoy elegant amenities and exceptional service for a perfect escape.</div><a class="btn btn-border-w btn-round" href="about1.html">Discover our story</a>
+                </div>
+              </div>
+            </li>
+            <li class="bg-dark-30 restaurant-page-header bg-dark" style="background-image:url(&quot;assets/images/restaurant/slider3.jpg&quot;);">
+              <div class="titan-caption">
+                <div class="caption-content">
+                  <div class="font-alt mb-30 titan-title-size-1"> Take a look at</div>
+                  <div class="font-alt mb-40 titan-title-size-3" >our Activities</div><a class="section-scroll btn btn-border-w btn-round" href="#specialities">Learn More</a>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <div class="main">
+        <section class="module" id="services">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-2 col-sm-offset-5">
+                <div class="alt-module-subtitle"><span class="holder-w"></span>
+                  <h5 class="font-serif">For your comfort</h5><span class="holder-w"></span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-8 col-sm-offset-2">
+                <h2 class="module-title font-alt">Our Services</h2>
+              </div>
+            </div>
+            <div class="row multi-columns-row">
+              <div class="col-sm-6 col-md-3 col-lg-3">
+                <div class="features-item">
+                  <div class="features-icon"><span class="icon-clock"></span></div>
+                  <h3 class="features-title font-alt">Opened 24/7</h3>Available around the clock, our resort offers meticulous attention to detail and seamless service, ensuring an exceptional experience for every guest.
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-3 col-lg-3">
+                <div class="features-item">
+                  <div class="features-icon"><span class="icon-streetsign"></span></div>
+                  <h3 class="features-title font-alt">Free parking</h3>Free parking with meticulous attention to detail and well-organized facilities ensures a hassle-free experience for all our guests.
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-3 col-lg-3">
+                <div class="features-item">
+                  <div class="features-icon"><span class="icon-map"></span></div>
+                  <h3 class="features-title font-alt">Central Location</h3>Located centrally, with meticulous planning and thoughtful design, we ensure a convenient and enjoyable experience for all guests.
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-3 col-lg-3">
+                <div class="features-item">
+                  <div class="features-icon"><span class="icon-heart"></span></div>
+                  <h3 class="features-title font-alt">High quality</h3>High quality with meticulous attention to detail and luxurious touches ensures a refined and exceptional experience for every guest.
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <hr class="divider-w">
+        <section class="module" id="specialities">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-2 col-sm-offset-5">
+                <div class="alt-module-subtitle"><span class="holder-w"></span>
+                  <h5 class="font-serif">Take a look at</h5><span class="holder-w"></span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-8 col-sm-offset-2">
+                <h2 class="module-title font-alt">Our Activities</h2>
+              </div>
+            </div>
+            
+            <div class="row multi-columns-row">
+              <div class="col-sm-6 col-md-3 col-lg-3">
+                <div class="content-box">
+                  <a class="section-scroll btn" href="#Booking">Book Now</a>
+                  <div class="content-box-image"><img src="assets/images/restaurant/kayaking.jpg" alt="Kabab"/></div>
+                  <h3 class="content-box-title font-serif">Kayaking</h3>Meticulous attention to detail ensures an enjoyable and seamless kayaking experience for all guests.
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-3 col-lg-3">
+                <div class="content-box">
+                  <a class="section-scroll btn" href="#Booking">Book Now</a>
+                  <div class="content-box-image"><img src="assets/images/restaurant/shikara.jpg" alt="Limes"/></div>
+                  <h3 class="content-box-title font-serif">Shikara Ride</h3>Experience the charm of Shikara boating with our careful attention to detail, ensuring a relaxing and memorable journey for every guest.
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-3 col-lg-3">
+                <div class="content-box">
+                  <a class="section-scroll btn" href="#Booking">Book Now</a>
+                  <div class="content-box-image"><img src="assets/images/restaurant/canoeing.jpg" alt="Radish"/></div>
+                  <h3 class="content-box-title font-serif">Canoeing</h3>Experience the thrill of 360-degree canoeing with our meticulous attention to detail, ensuring a smooth and exhilarating adventure for all guests.
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-3 col-lg-3">
+                <div class="content-box">
+                  <a class="section-scroll btn" href="#Booking">Book Now</a>
+                  <div class="content-box-image"><img src="assets/images/restaurant/sunset.jpg" alt="Corn"/></div>
+                  <h3 class="content-box-title font-serif">Sunset Tour</h3>Immerse yourself in a breathtaking sunset tour, where our careful attention to detail guarantees a serene and unforgettable experience.
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <hr class="divider-w">
+        <section class="module" id="menu">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-2 col-sm-offset-5">
+                <div class="alt-module-subtitle">
+                  <span class="holder-w"></span>
+                  <h5 class="font-serif">Most Popular Rooms</h5>
+                  <span class="holder-w"></span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-8 col-sm-offset-2">
+                <h2 class="module-title font-alt">Popular Rooms</h2>
+              </div>
+            </div>
+            <div class="row multi-columns-row">
+              <div class="col-sm-6">
+                <div class="menu">
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <img src="assets/images/restaurant/room1.jpg" alt="Room 1" class="img-responsive">
+                    </div>
+                    <div class="col-sm-8">
+                      <h4 class="menu-title font-alt">King Size  Bed</h4>
+                      <div class="menu-detail font-serif">Non-Veg / Veg / Sea Foods</div>
+                    </div>
+                    <div class="col-sm-4 menu-price-detail">
+                      <h4 class="menu-price font-alt"><a href="tel:+919995685136">
+                        <h5>Contact us</h5>
+                      </a>
+                      </h4>
+                    </div>
+                  </div>
+                </div>
+                <!-- Repeat the above block for other menu items -->
+                <div class="menu">
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <img src="assets/images/restaurant/room2.jpg" alt="Room 2" class="img-responsive">
+                    </div>
+                    <div class="col-sm-8">
+                      <h4 class="menu-title font-alt">2 Single Bed</h4>
+                      <div class="menu-detail font-serif">Non-Veg / Veg / Sea Foods</div>
+                    </div>
+                    <div class="col-sm-4 menu-price-detail">
+                      <h4 class="menu-price font-alt"><a href="tel:+919995685136">
+                        <h5>Contact us</h5>
+                      </a>
+                      </h4>
+                    </div>
+                  </div>
+                </div>
+                <!-- Add other menu items here with images -->
+              </div>
+              <div class="col-sm-6">
+                <div class="menu">
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <img src="assets/images/restaurant/room3.jpg" alt="Room 3" class="img-responsive">
+                    </div>
+                    <div class="col-sm-8">
+                      <h4 class="menu-title font-alt">Twin Bed</h4>
+                      <div class="menu-detail font-serif">Non-Veg / Veg / Sea Foods</div>
+                    </div>
+                    <div class="col-sm-4 menu-price-detail">
+                      <h4 class="menu-price font-alt"><a href="tel:+919995685136">
+                        <h5>Contact us</h5>
+                      </a>
+                      </h4>
+                    </div>
+                  </div>
+                </div>
+                <!-- Repeat the above block for other menu items -->
+                <div class="menu">
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <img src="assets/images/restaurant/room4.jpg" alt="Room 4" class="img-responsive">
+                    </div>
+                    <div class="col-sm-8">
+                      <h4 class="menu-title font-alt">Single Bed</h4>
+                      <div class="menu-detail font-serif">Non-Veg / Veg / Sea Foods</div>
+                    </div>
+                    <div class="col-sm-4 menu-price-detail">
+                      <h4 class="menu-price font-alt"><a href="tel:+919995685136">
+                        <h5>Contact us</h5>
+                      </a>
+                      </h4>
+                    </div>
+                  </div>
+                </div>
+                <!-- Add other menu items here with images -->
+              </div>
+            </div>
+            <div class="text-center">
+              <a class="btn btn-border-d mt-50" href="/gallery">Check our Gallery</a>
+            </div>
+          </div>
+        </section>
+        <hr class="divider-w">
+        <section class="module" id="experiences">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8 col-sm-offset-2">
+                <h2 class="module-title font-alt">Packages</h2>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="experience">
+                  <h4 class="font-alt">Classic Experience</h4>
+                  <ul class="font-serif">
+                    <li>9:30 AM: Welcome Drink</li>
+                    <li>10:00 AM - 1:00 PM: Shikara Boating</li>
+                    <li>1:00 PM: Lunch (Fish Curry, Kappa, Prawns Roast, Karimeen Fry)</li>
+                    <li>2:30 PM - 4:30 PM: Canoeing</li>
+                    <li>4:30 PM: Tea and Snacks</li>
+                  </ul>
+                  <h5 class="font-alt">Price: ₹1000 Per head</h5>
+                  <p>Mininum - 10 Members</p>
+                  <a href="tel:+919876543210" class="call-button">Call</a>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="experience">
+                  <h4 class="font-alt">Deluxe Experience</h4>
+                  <ul class="font-serif">
+                    <li>9:30 AM: Welcome Drink</li>
+                    <li>10:00 AM - 1:00 PM: Shikara Boating</li>
+                    <li>1:00 PM: Lunch (Fish Curry, Kappa, Prawns Roast, Karimeen Fry, Crab Pepper Roast, Kakka Thoran)</li>
+                    <li>2:30 PM - 4:30 PM: Canoeing</li>
+                    <li>4:30 PM: Tea and Snacks</li>
+                  </ul>
+                  <h5 class="font-alt">Price: ₹1100 Per head</h5>
+                  <p>Mininum - 10 Members</p>
+                  <a href="tel:+919876543210" class="call-button">Call</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- Modal Structure -->
+<div id="imageModal" class="modal">
+  <span class="closeX">&times;</span>
+  <img class="modal-content" id="modalImage">
+  <div id="caption"></div>
+</div>
+
+        
+        <section class="module pt-0 pb-0 " id="Booking">
+          <div class="row position-relative m-0">
+            <div class="col-xs-12 col-md-6 side-image-text">
+              <div class="row">
+                <div class="col-sm-12">
+                  <h2 class="module-title font-alt align-left">Reserve a Room</h2>
+                  <p class="module-subtitle font-serif align-left">Indulge in a serene getaway at our opulent resort. Reserve your room now to enjoy unparalleled comfort and exceptional service. Whether you seek a tranquil retreat or a lavish escape, our elegantly designed rooms promise an unforgettable stay. Book today and immerse yourself in a world of luxury and relaxation.</p>
+                </div>
+              </div>
+              <form class="reservation-form" id="reservationForm" action="" method="post">
+                <div class="form-group">
+                  <div class="input-group">
+                    <div class="input-group-addon"><i class="icon-calendar"></i></div>
+                    <input class="form-control input-lg" id="date" type="date" name="date" placeholder="dd/mm/yyyy" required=""/>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="input-group">
+                    <div class="input-group-addon"><i class="icon-clock"></i></div>
+                    <select class="form-control input-lg" id="time" name="time" type="text" required="required">
+                      <option value="time" disabled="" selected="">Select Time</option>
+                      <option value="00:00">00:00</option>
+                      <option value="01:00">01:00</option>
+                      <option value="02:00">02:00</option>
+                      <option value="03:00">03:00</option>
+                      <option value="04:00">04:00</option>
+                      <option value="05:00">05:00</option>
+                      <option value="06:00">06:00</option>
+                      <option value="07:00">07:00</option>
+                      <option value="08:00">08:00</option>
+                      <option value="09:00">09:00</option>
+                      <option value="10:00">10:00</option>
+                      <option value="11:00">11:00</option>
+                      <option value="12:00">12:00</option>
+                      <option value="13:00">13:00</option>
+                      <option value="14:00">14:00</option>
+                      <option value="15:00">15:00</option>
+                      <option value="16:00">16:00</option>
+                      <option value="17:00">17:00</option>
+                      <option value="18:00">18:00</option>
+                      <option value="19:00">19:00</option>
+                      <option value="20:00">20:00</option>
+                      <option value="21:00">21:00</option>
+                      <option value="22:00">22:00</option>
+                      <option value="23:00">23:00</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="input-group">
+                    <div class="input-group-addon"><i class="icon-profile-male"></i></div>
+                    <input class="form-control input-lg" id="people" type="number" name="people" min="1" max="50" step="1" placeholder="Number of people" required=""/>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="input-group">
+                    <div class="input-group-addon"><i class="icon-envelope"></i></div>
+                    <input class="form-control input-lg" type="email" id="email" name="email" placeholder="Your Email*" required="required" data-validation-required-message="Please enter your email address."/>
+                  </div> 
+                </div>
+                <div class="form-group">
+                  <div class="input-group">
+                    <div class="input-group-addon"><i class="icon-phone"></i></div>
+                    <input class="form-control input-lg" type="tel" id="phone" name="phone" placeholder="Your Phone Number*" required="required" pattern="[0-9]{10}" data-validation-required-message="Please enter your phone number." />
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <button class="btn btn-g btn-round btn-block btn-lg mt-20" id="rfsubmit" type="submit"><i class="fa fa-paper-plane-o"></i> Reserve</button>
+                </div>
+                <div id="reservationFormResponse"></div>
+              </form>
+            </div>
+            <div class="col-xs-12 col-md-6 col-md-offset-6 side-image restaurant-image-overlay" data-background="assets/images/restaurant/canoeing.jpg"></div>
+          </div>
+        </section>
+        <div>
+          <hr class="divider-w">
+        </div>
+
+        <script>
+          // Get the modal
+const modal = document.getElementById("imageModal");
+const modalImg = document.getElementById("modalImage");
+const captionText = document.getElementById("caption");
+
+// Select all images within the "menu" section
+const images = document.querySelectorAll(".menu img");
+
+// Loop through images to add click event
+images.forEach((img) => {
+  img.addEventListener("click", () => {
+    modal.style.display = "block";
+    modalImg.src = img.src;
+    captionText.innerHTML = img.alt;
+  });
+});
+
+// Close the modal when clicking on <span> (x)
+document.querySelector(".closeX").onclick = function () {
+  modal.style.display = "none";
+};
+
+        </script>
+<%- include('../partials/footer.ejs') %>
