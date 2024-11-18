@@ -15,5 +15,6 @@ router.get('/gallery',controller.loadGallery);
 router.get('/contact',controller.loadContact)
 router.post('/contact',controller.contactUs)
 router.get('/about',controller.loadAbout)
+router.get('/activities',controller.loadActivities)
 
 module.exports = router;

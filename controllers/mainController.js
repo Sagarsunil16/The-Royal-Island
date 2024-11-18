@@ -1,12 +1,13 @@
 const { text } = require('express');
 const nodemailer = require('nodemailer')
+require('dotenv').config()
 
 
 const transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
-        user: 'sneakerhead16.in@gmail.com',
-        pass: 'crbv emzv vsjc casx'
+        user: process.env.USER,
+        pass: process.env.PASS
     },
     tls: {
         rejectUnauthorized: false
@@ -51,7 +52,7 @@ const contactUs = async (req, res) => {
   
       const mailOptions = {
         from: 'sneakerhead16.in@gmail.com', // Your email address
-        to: 'sneakerhead16.in@gmail.com',   // Email where form submissions should go
+        to: 'theroyalisland123@gmail.com',   // Email where form submissions should go
         subject: 'New Contact Form Submission',
         text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
       };
@@ -78,6 +79,15 @@ const loadAbout = async(req,res)=>{
     }
 }
 
+const loadActivities = async(req,res)=>{
+    try {
+        res.render('activities',{ title: 'The Royal Island'})
+    } catch (error) {
+        console.log("Error while loading the Activity Page", error);
+        res.status(500).send("Error while loading the Activity page");
+    }
+}
+
 
 
 const handleReservation = async(req,res)=>{
@@ -86,7 +96,7 @@ const {date, time, people, email,phone} = req.body
 // Setup email data
 const mailOption = {
     from:'sneakerhead16.in@gmail.com',
-    to:'sneakerhead16.in@gmail.com',
+    to:'theroyalisland123@gmail.com',
     subject:'New Reservation Request',
     text:`Date: ${date}\nTime: ${time}\nNumber of People: ${people}\nEmail: ${email}\nPhone:${phone}`
 
@@ -111,5 +121,6 @@ module.exports={
     loadGallery,
     handleReservation,
     contactUs,
-    loadAbout
+    loadAbout,
+    loadActivities
 }

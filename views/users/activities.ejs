@@ -1,0 +1,350 @@
+<%- include('../partials/header.ejs') %>
+
+<style>
+  /* General Section Styling */
+  .module {
+    padding: 60px 0;
+    background-color: #f9f9f9;
+  }
+
+  .section-subtitle {
+    color: #888;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  .module-title {
+    font-size: 36px;
+    margin-bottom: 40px;
+    color: #333;
+  }
+
+  /* Activity Card Styling */
+  .activity-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    margin-bottom: 10px;
+  }
+
+  .activity-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+  }
+
+  .activity-card-img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+  }
+
+  .activity-card-content {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .activity-card-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 15px;
+  }
+
+  .activity-card-desc {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+  }
+
+  .activity-card-btn {
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    background-color: #007bff;
+    border-radius: 30px;
+    color: #fff;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    margin: 10px;
+  }
+
+  .activity-card-btn:hover {
+    background-color: #0056b3;
+  }
+
+ /* Center the modal content vertically and horizontally on all screen sizes */
+.modal-dialog {
+  display: flex;
+  justify-content: center;   /* Horizontal centering */
+  align-items: center;       /* Vertical centering */
+  min-height: 100vh;          /* Full viewport height */
+  margin: auto;               /* Ensure the modal remains centered */
+}
+
+/* Ensure the modal content has proper padding and rounded corners */
+.modal-content {
+  border-radius: 12px;        /* Optional: rounded corners */
+  padding: 20px;              /* Optional: space inside the modal */
+  background-color: #fff;     /* Optional: background color */
+}
+
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .activity-card-img {
+      height: 200px;
+    }
+    .activity-card-title {
+      font-size: 20px;
+    }
+    .activity-card-desc {
+      font-size: 13px;
+    }
+  }
+</style>
+
+
+<section class="module bg-dark-60 gallery-page-header parallax-bg" data-background="assets/images/activities_bg.jpg">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+          <h2 class="module-title font-alt">Activities</h2>
+          <div class="module-subtitle font-serif">Embark on a journey of discovery and excitement. From serene moments of relaxation to exhilarating adventures, our activities promise unforgettable experiences for every soul.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+<section class="module" id="activities">
+  <div class="container">
+    <!-- Subtitle -->
+    <div class="row">
+      <div class="col-12 text-center">
+        <h5 class="font-serif section-subtitle">Take a look at</h5>
+        <h2 class="module-title">Our Activities</h2>
+      </div>
+    </div>
+
+    <!-- Activity Cards -->
+    <div class="row">
+      <!-- Card 1 -->
+      <div class="col-lg-6 col-md-6 mb-4">
+        <div class="activity-card">
+          <img src="assets/images/restaurant/kayaking.jpg" alt="Kayaking" class="activity-card-img">
+          <div class="activity-card-content">
+            <h3 class="activity-card-title">Kayaking</h3>
+            <p class="activity-card-desc">
+              Meticulous attention to detail ensures an enjoyable and seamless kayaking experience for all guests.
+            </p>
+            <a href="tel:+919995685136" class="btn btn-primary activity-card-btn">Call Now</a>
+            <button class="btn btn-secondary m-3" data-toggle="modal" data-target="#kayakingModal">Show More Details</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="col-lg-6 col-md-6 mb-4">
+        <div class="activity-card">
+          <img src="assets/images/restaurant/shikara.jpg" alt="Shikara Ride" class="activity-card-img">
+          <div class="activity-card-content">
+            <h3 class="activity-card-title">Shikara Ride</h3>
+            <p class="activity-card-desc">
+              Experience the charm of Shikara boating with our careful attention to detail, ensuring a relaxing journey.
+            </p>
+            <a href="tel:+919995685136" class="btn btn-primary activity-card-btn">Call Now</a>
+            <!-- Button to trigger modal -->
+            <button class="btn btn-secondary m-3" data-toggle="modal" data-target="#shikaraModal">Show More Details</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- Card 3 -->
+      <div class="col-lg-6 col-md-6 mb-4">
+        <div class="activity-card">
+          <img src="assets/images/restaurant/canoeing.jpg" alt="Canoeing" class="activity-card-img">
+          <div class="activity-card-content">
+            <h3 class="activity-card-title">Canoeing</h3>
+            <p class="activity-card-desc">
+              Experience the thrill of 360-degree canoeing with our meticulous attention to detail, ensuring a smooth adventure.
+            </p>
+            <a href="tel:+919995685136" class="btn btn-primary activity-card-btn">Call Now</a>
+            <button class="btn btn-secondary m-3" data-toggle="modal" data-target="#canoeingModal">Show More Details</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="col-lg-6 col-md-6 mb-4">
+        <div class="activity-card">
+          <img src="assets/images/restaurant/sunset.jpg" alt="Sunset Tour" class="activity-card-img">
+          <div class="activity-card-content">
+            <h3 class="activity-card-title">Sunrise / Sunset Tour</h3>
+            <p class="activity-card-desc">
+              Immerse yourself in a breathtaking sunset tour, where our attention to detail guarantees a serene experience.
+            </p>
+            <a href="tel:+919995685136" class="btn btn-primary activity-card-btn">Call Now</a>
+             <!-- Button to trigger modal -->
+             <button class="btn btn-secondary m-3" data-toggle="modal" data-target="#sunsetModal">Show More Details</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+</section>
+
+<!-- Modal for Shikara Ride -->
+<div class="modal fade" id="shikaraModal" tabindex="-1" role="dialog" aria-labelledby="shikaraModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        <h5 class="modal-title" id="shikaraModalLabel">Shikara Motor Boat Ride</h5>
+      </div>
+      <div class="modal-body">
+        <h5>Attractions</h5>
+        <ul>
+          <li>Start from Kallada River</li>
+          <li>Astamudi Lake</li>
+          <li>Shallow Waters (Travellers can get down into the shallow waters)</li>
+          <li>Mangrove Cave</li>
+          <li>Chinese Fishing Net</li>
+          <li>Dutch Church</li>
+          <li>Perumon Bridge</li>
+          <li>S Curv Viewpoint</li>
+          <li>Return to Kallada River</li>
+        </ul>
+        <h5>Booking Information</h5>
+        <ul>
+          <li>1 Hr Booking Cost: INR 1000 - 1300/-</li>
+          <li>Maximum 14 People</li>
+          <li>Minimum 2 Hour Booking</li>
+          <li>Circle Trip Minimum 3 Hrs</li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      <a href="tel:+919995685136" class="btn btn-primary">Call Now</a>
+    </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal for Sunset Tour -->
+<div class="modal fade" id="sunsetModal" tabindex="-1" aria-labelledby="sunsetModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+          <h5 class="modal-title" id="sunsetModalLabel">Sunrise/Sunset Tour</h5>
+        </div>
+        <div class="modal-body">
+          <h5>Sunrise/Sunset Tour 2 Hrs</h5>
+          <p><strong>Charges:</strong> ₹1500/- Per Canoe(Sunrise Tour)</p>
+          <p><strong>Charges:</strong> ₹1000/- Per Canoe(Sunset Tour)</p>
+          <h5>Attractions:</h5>
+          <ul>
+            <li>Starting From Narrow Ways and Canals of Munroe Island</li>
+            <li>Fish Farms (We can see only during fish season)</li>
+            <li>Kallada River - Ashtamudi Lake</li>
+            <li>Sunrise point of Kallada River - Ashtamudi Lake</li>
+            <li>Beautiful Sunrise of Munroe Island</li>
+            <li>Beautiful Sunset of Munroe Island</li>
+            <li>Following the Ashtamudi Lake</li>
+            <li>Mangrove Arch</li>
+            <li>Mangrove Cave</li>
+            <li>Narrow Canals with 2 sides small mangrove varieties</li>
+          </ul>
+          
+          <h5>Timing:</h5>
+          <p>05:45 AM – 08:45 AM(Sunrise View)</p>
+          <p>04:20 PM – 06:50 PM(Sunset View)</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <a href="tel:+919995685136" class="btn btn-primary">Call Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for Canoeing -->
+<div class="modal fade" id="canoeingModal" tabindex="-1" aria-labelledby="canoeingModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+          <h5 class="modal-title" id="canoeingModalLabel">Canoeing</h5>
+        </div>
+        <div class="modal-body">
+          <h5>Canoeing 2 Hrs</h5>
+          <p><strong>Charges:</strong> ₹1000/- Per Canoe</p>
+          
+          <h5>Attractions:</h5>
+          <ul>
+            <li>Experience the thrill of 360-degree canoeing with our meticulous attention to detail, ensuring a smooth adventure.</li>
+            <li>Explore the peaceful surroundings and feel the harmony of nature while canoeing through serene waters.</li>
+            <li>Discover the beauty of remote areas, hidden from usual tourists' paths.</li>
+            <li>Great opportunity for photography and nature lovers.</li>
+            <li>Perfect for all skill levels, from beginners to experienced canoeists.</li>
+          </ul>
+          
+          <h5>Timing:</h5>
+          <p>03:00 PM – 05:00 PM</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <a href="tel:+919995685136" class="btn btn-primary">Call Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+<!-- Modal for Kayaking -->
+<div class="modal fade" id="kayakingModal" tabindex="-1" aria-labelledby="kayakingModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+          <h5 class="modal-title" id="kayakingModalLabel">Kayaking</h5>
+        </div>
+        <div class="modal-body">
+          <h5>Kayaking 1 Hr</h5>
+          <p><strong>Charges:</strong> Single (₹300/- Per Kayak), Double (₹400/- Per Kayak)</p>
+          
+          <h5>Attractions:</h5>
+          <ul>
+            <li>Kayaking at the stunning S-Curve Point offering amazing views and a thrilling water experience.</li>
+            <li>Enjoy the calm and peaceful waters around the S-Curve with clear visibility and surrounding nature.</li>
+            <li>Explore hidden spots along the river while paddling through the scenic surroundings.</li>
+            <li>A perfect activity for adventure lovers and nature enthusiasts alike.</li>
+          </ul>
+          
+          <h5>Timing:</h5>
+          <p>06:00 AM - 06:00 PM</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <a href="tel:+919995685136" class="btn btn-primary">Call Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+<%- include('../partials/footer.ejs') %>
