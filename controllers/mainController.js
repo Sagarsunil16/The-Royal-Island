@@ -52,7 +52,7 @@ const contactUs = async (req, res) => {
   
       const mailOptions = {
         from: 'sneakerhead16.in@gmail.com', // Your email address
-        to: 'theroyalisland123@gmail.com',   // Email where form submissions should go
+        to: 'tri.mundro@gmail.com',   // Email where form submissions should go
         subject: 'New Contact Form Submission',
         text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
       };
@@ -96,7 +96,7 @@ const {date, time, people, email,phone} = req.body
 // Setup email data
 const mailOption = {
     from:'sneakerhead16.in@gmail.com',
-    to:'theroyalisland123@gmail.com',
+    to:'tri.mundro@gmail.com',
     subject:'New Reservation Request',
     text:`Date: ${date}\nTime: ${time}\nNumber of People: ${people}\nEmail: ${email}\nPhone:${phone}`
 
